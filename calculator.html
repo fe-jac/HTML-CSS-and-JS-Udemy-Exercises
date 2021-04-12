@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Fernanda Jacinto">
+    <meta name="description" content="Learning HTML5 and CSS">
+
+    <title>Basic Calculator</title>
+
+ <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <style>
+
+        body{
+            text-align: center;
+            background-image: linear-gradient( hsla(252, 70%, 83%, 0.5), hsla(252, 70%, 83%, 1), hsla(252, 70%, 83%, 0.5));
+            font-family: verdana, arial, sans-serif;
+                
+        }
+        
+        #content{
+        border: solid;
+        width: 250px;
+        margin-left: 50%;
+        transform: translate(-125px, 0);
+        }
+        
+        
+        h2{
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 300%;
+            color: hsl(252, 45%, 15%);
+            
+        }
+        
+        button{
+            padding: 15px;
+            width: 60px;
+            border-radius: 20%;
+            margin: 8%;
+            font-size: 25px;
+            display: inline;
+            color: hsl(252, 70%, 83%);
+            background-color: hsl(252, 45%, 15%);
+        }
+        
+        #screenOutput{
+            background: hsl(252, 34%, 92%);
+            border: solid hsl(252, 45%, 15%);
+            height: 30px;
+            width: 90%;
+            margin: 5%;
+            color: hsl(252, 45%, 15%);
+
+        }
+        
+        
+        
+    </style>
+</head>
+
+<body>
+
+    <h2>Calculator</h2>
+        
+    <div id="content">
+    
+        
+        
+        <div id="screenOutput"></div>
+    
+        <button onclick="startCalc('+')">+</button>
+        <button onclick="startCalc('-')">-</button>
+        <button onclick="startCalc('x')">x</button>
+        <button onclick="startCalc('/')">/</button>
+        
+        
+        
+    </div>
+    
+   
+        <script>
+
+              //assim q carrega a pagina, pede-se um número para o usuário 
+            var firstNum = prompt("Digite um número para o cálculo: ");
+            //transforma a string em número
+            firstNum = parseFloat(firstNum);
+
+
+            //escreve o número na div
+            screenOut(firstNum);
+
+            //funcão para escrever na tela
+            function screenOut(numberOut){
+                //seleciona o elemento no HTML
+                var screenNum = document.querySelector("#screenOutput");
+                //escreve o número na div 
+                screenOutput.innerHTML = numberOut;
+            }
+
+            function calculete(operator, firstNumber, secondNumber){
+                
+                var answerCalc = 'null'
+
+                switch(operator){
+                    case "+":
+                        answerCalc = firstNumber + secondNumber;
+                        break;
+                    case "-":
+                        answerCalc = firstNumber - secondNumber;
+                        break;
+                    case "x":
+                        answerCalc = firstNumber * secondNumber;
+                        break;
+                    case "/":
+                        answerCalc = firstNumber / secondNumber;            
+                }
+                
+                return answerCalc;
+
+            }
+            
+            function startCalc(operator){
+                var firstNumber = document.querySelector('#screenOutput').textContent;
+                firstNumber = parseFloat(firstNumber);
+                
+                var secondNumber = prompt("Digite o segundo número: ");
+                secondNumber = parseFloat(secondNumber);
+                
+                var msg = calculete(operator, firstNumber, secondNumber)
+                
+                screenOut(msg);
+            }
+            
+            
+        </script>
+
+
+    </body>
+    
+</html>
+        
+        
+ 
