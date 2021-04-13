@@ -82,18 +82,20 @@
     </div>
     
    
-        <script>
+         <script>
 
-              //assim q carrega a pagina, pede-se um número para o usuário 
+              //assim q carrega a pagina, pede-se um número para o usuário e transforma a o número em formato de string para numero
             var firstNum = prompt("Digite um número para o cálculo: ");
-            //transforma a string em número
             firstNum = parseFloat(firstNum);
+            
+            verifyNumber(firstNum);
 
 
             //escreve o número na div
             screenOut(firstNum);
 
-            //funcão para escrever na tela
+            
+            //define uma funcão para escrever na tela
             function screenOut(numberOut){
                 //seleciona o elemento no HTML
                 var screenNum = document.querySelector("#screenOutput");
@@ -101,6 +103,9 @@
                 screenOutput.innerHTML = numberOut;
             }
 
+            
+            //location.reload(true)     recarrega a pg
+            //Com os parâmetros do operador e dos dois números a serem operados, realiza o calculo e retorna o número calculado
             function calculete(operator, firstNumber, secondNumber){
                 
                 var answerCalc = 'null'
@@ -116,19 +121,34 @@
                         answerCalc = firstNumber * secondNumber;
                         break;
                     case "/":
-                        answerCalc = firstNumber / secondNumber;            
+                        if(secondNumber == 0){
+                            alert("Can't divide by zero.");
+                            location.reload(true);
+                        }
+                        else{
+                        answerCalc = firstNumber / secondNumber;    
+                        }
                 }
                 
                 return answerCalc;
 
+                
+                
             }
             
+            //função chamada quando o botão é apertado. Pegará o primeiro valor que está na tela, perguntará o segundo número e com os parâmetros de operador e números, chama a função para calcular e guarda o número retornado em uma variável. Chama a função para escrever esta variável na tela. 
             function startCalc(operator){
+                
+            
                 var firstNumber = document.querySelector('#screenOutput').textContent;
                 firstNumber = parseFloat(firstNumber);
                 
+                verifyNumber(firstNumber);
+                
                 var secondNumber = prompt("Digite o segundo número: ");
                 secondNumber = parseFloat(secondNumber);
+                
+                verifyNumber(secondNumber);
                 
                 var msg = calculete(operator, firstNumber, secondNumber)
                 
@@ -136,10 +156,52 @@
             }
             
             
+            //funções para verificar se os números e as operações são válidas
+            function verifyNumber(typedNumber){
+                
+                if( isNaN(typedNumber)){
+                    
+                    alert("Type a valid number.");
+                    location.reload(true);
+                }
+                
+            }
+            
+            function verifyOperator(chosenOperator){
+                
+                if(chosenOperator=="+" || chosenOperator=="-" || chosenOperator=="x" || chosenOperator=="/"){
+                    
+                }
+                
+                else{
+                    alert("Choose a valid operator.");
+                    location.reload(true);
+                }
+                
+            }
+            
         </script>
 
-
     </body>
+    
+    
+    <!-- erro pode ser tratado utilizando:
+            define o erro, em vez de alert("type valid number.") utiliza 
+
+            throw new Error("Type a valid number.")
+            
+
+            e, no lugar de  var msg = calculete(operator, firstNumber, secondNumber), na função startCalc(), utiliza
+
+
+            try{
+                var msg = calculete(operator, firstNumber, secondNumber);
+            }
+            catch(e){
+                alert(e);
+                return;                              esse return é só para não aparecer não definido
+            }
+    -->
     
 </html>
         
