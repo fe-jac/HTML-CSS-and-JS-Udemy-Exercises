@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Fernanda Jacinto">
+    <meta name="description" content="Learning HTML5 and CSS">
+
+    <title>HTML and CSS hands on</title>
+
+
+    <style>
+    
+        body{
+            text-align: center;
+            height:100%;
+            background-image: url(chalkboard-with-math-elements.jpg);
+            background-size:cover;
+            position: absolute;
+        }
+        img{
+            
+            width: 90%;
+        }
+        #container{
+            margin-top: 10%;
+            display: flex;
+            justify-content: space-around;
+           
+        }
+        .card{
+            width: 25%;
+        }
+        #showArea{
+            background-color: #333232;
+            border: solid 2px aliceblue;
+            border-radius: 10%;
+            margin-left: 42.5%;
+            height: 30px;
+            width: 15%;
+            text-align: center;
+            color: aliceblue;
+            padding: 15px;
+            font-size: 25px
+          
+        }
+        button{
+            margin: 7.5%;
+            font-size: 20px;
+            color: aliceblue;
+            background: #333232;
+            height: 60px;
+            border-radius: 10%;
+        }
+        p{
+            color: aliceblue;
+            font-size: 20px;
+            text-shadow: #333232 1px 1px 3px;
+            background-color:  hsla(0, 1%, 20%, 0.5);
+            display: inline-block;
+        }
+        
+        a{
+            color: aliceblue;
+            font-size: 7px;
+        }
+        .pageImage{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+        .card a{
+            writing-mode: vertical-rl;
+        }
+        
+    </style>
+    
+    
+</head>
+
+<body>
+
+    <div id="container">
+    
+        <div class="card">
+            <img src= "../TriangleArea/basehigthtriangle.jpg">
+            <a href='https://br.freepik.com/fotos/escola'>Escola foto criado por kjpargeter (modificado) - br.freepik.com</a>
+            <button onclick="areaHightBase()">
+                Calculate
+            </button>
+        </div>
+        
+        <div class="card">
+            <img src="sidestriangle.jpg">
+            <a href='https://br.freepik.com/fotos/escola'>Escola foto criado por kjpargeter (modificado) - br.freepik.com</a>
+            <button onclick="areaSides()">
+                Calculate
+            </button>
+        </div>
+        
+        <div class="card">
+            <img src="sentriangle.jpg">
+            <a href='https://br.freepik.com/fotos/escola'>Escola foto criado por kjpargeter (modificado) - br.freepik.com</a>
+            <button onclick="areaSin()">
+                Calculate
+            </button>
+        </div>
+    </div>
+    
+    <p>The area is:</p>
+    
+    <div id="showArea">
+           
+    </div>
+        
+    <a class="pageImage" href='https://www.freepik.com/vectors/background'>Background vector created by bimbimkha - www.freepik.com</a>
+    
+    
+    <script>
+        
+        
+        function showResult(result){
+            var mensage = document.querySelector("#showArea");
+            showArea.innerHTML = result;
+         }
+        
+        function areaHightBase(base, height){
+            
+            var base = prompt("What is the base length?");
+            base = parseFloat(base);
+            
+            var height = prompt("What is the triangle height?");
+            height = parseFloat(height);
+            
+            try{
+            var areaCalc = calcAreaHeight(base, height);
+            } catch(e){
+                alert(e);
+            }
+            
+            showResult(areaCalc);
+        }
+        
+        function calcAreaHeight(base, height){
+            
+            if (base === undefined || height == undefined){
+                throw new Error ("Please, enter with the numbers required.");
+            }
+            if (isNaN(base) || isNaN(height)){
+                throw new Error ("Please, enter with valid numbers.");
+            }
+            
+            return base*height*0.5;
+            
+        }
+        
+        function areaSides(side1, side2, side3){
+            var side1 = prompt("What is the first side?");
+            side1 = parseFloat(side1);
+            
+            var side2 = prompt("What is the second side?");
+            side2 = parseFloat(side2);
+            
+            var side3 = prompt("What is the last side?");
+            side3 = parseFloat(side3);
+            
+            try{
+                var areaCalc = calcAreaSides(side1, side2, side3)
+            } catch (e){
+                alert(e);
+            }
+            
+            areaCalc = areaCalc.toFixed(2);
+            showResult(areaCalc);
+        }
+        
+        function calcAreaSides(side1, side2, side3){
+            
+            if (side1 === undefined || side2 === undefined || side3 === undefined){
+                throw new Error ("Please, enter with the numbers required.");
+            }
+            if (isNaN(side1) || isNaN(side2) || isNaN(side3)){
+                throw new Error ("Please, enter with valid numbers.");
+            }
+            var halfPer = (side1 + side2 + side3) * 0.5;
+            var areaCalc = Math.sqrt(halfPer * (halfPer - side1) * (halfPer - side2) * (halfPer - side3));
+            
+            return areaCalc;
+        }
+          
+        function areaSin(side1, side2, angle){
+            var side1 = prompt("What is the first side?");
+            side1 = parseFloat(side1);
+            
+            var side2 = prompt("What is the second side?");
+            side2 = parseFloat(side2); 
+            
+            var angle = prompt("What is the angle between the sides?");
+            angle = parseFloat(angle);
+            
+            try{
+                var calcArea = calcAreaSin(side1,side2,angle);
+            } catch (e){
+                alert(e);
+            }
+            calcArea = calcArea.toFixed(2);
+            showResult(calcArea);
+        }
+        
+        function calcAreaSin(side1, side2, angle){
+            
+            if (side1 === undefined || side2 === undefined || angle === undefined){
+                throw new Error ("Please, enter with the numbers required.");
+            }
+            if (isNaN(side1) || isNaN(side2) || isNaN(angle)){
+                throw new Error ("Please, enter with valid numbers.");
+            }
+            
+            var sinAngle = Math.sin(angle*(Math.PI/180));
+            var calcArea = 0.5 * side1 * side2 * sinAngle;
+
+            return calcArea;
+        }
+    </script>     
+    
+</body>
+</html>
